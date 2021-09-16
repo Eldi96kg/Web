@@ -1,41 +1,19 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>{{category.title}}</title>
-  </head>
-  <body>
+{% extends 'base.html' %}
 
-<nav class="navbar navbar-expand-lg navbar-light  bg-info bg-gradient bg-opacity-50 text-white">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'home' %}">News</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"> <a class="nav-link" href="{% url 'home' %}">Главная</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/">Добавить новость</a> </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="container text-center"><h1>{{news.title}}</h1><h4>Всего новостей: {{news.count}}</h4></div>
-<div class="container text-center mt-3">
-
-    <div class="row ">
+{%block title%}Category{%endblock%}
+{% block sidebar %}
     <div class="col-md-4">
-
     <div class="list-group mt-3">
 {% for item in categories %}
   <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action">{{item.title}}</a>
         {% endfor %}
 </div>
-
     </div>
-        <div class="col-md-8">
+
+{%endblock%}
+
+{% block content %}
+
     {% for item in news %}
     <div class="card mt-3">
                             <div class="card-header "> {{item.category}}</div>
@@ -47,29 +25,10 @@
                                     {%endif%}
                                     <h5 class="card-title {% cycle 'text-danger' 'text-success' 'text-primary' %}">{{item.title}}</h5>
                                     <p class="card-text">{{item.content|linebreaks|truncatewords:100}}</p>
-                                    <a href="#" class="btn btn-primary">Read more...</a>
+                                    <a href="{{item.get_absolute_url}}" class="btn btn-primary">Read more...</a>
                             </div>
                             <div class="card-footer bg-transparent border-success">{{item.created_at|date:"Y-m-d H:i:s"}}  </div>
    {% endfor %}
             </div>
-        </div>
-</div>
 
-
-
-
-
-
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
-
-
-
-
-</body>
-</html>
+{%endblock%}

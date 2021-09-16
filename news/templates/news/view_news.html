@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{%block title%}{{news_item.title}}{%endblock%}
+{% block sidebar %}
+
+    <div class="list-group mt-3">
+        {% for item in category %}
+        <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action">{{item.title}}</a>
+        {% endfor %}
+    </div>
+
+
+{%endblock%}
+
+{% block content %}
+
+    <div class="card mt-3">
+        <div class="card-header "> {{news_item.category}}</div>
+        <div class="card-body  ">
+            {% if news_item.photo %}
+            <img src="{{news_item.photo.url}}" alt="y" width="300" height="250" class="float-left  "  >
+            {% else %}
+            <img src="https://picsum.photos/id/1060/350/300/?blur=2" width="300" height="250" class="float-left ">
+            {%endif%}
+            <h5 class="card-title {% cycle 'text-danger' 'text-success' 'text-primary' %}">{{news_item.title}}</h5>
+            <p class="card-text">{{news_item.content|linebreaks}}</p>
+            </div>
+            <div class="card-footer bg-transparent border-success">{{news_item.created_at|date:"Y-m-d H:i:s"}}  </div>
+   </div>
+
+
+{%endblock%}
