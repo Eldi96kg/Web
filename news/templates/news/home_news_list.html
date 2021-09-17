@@ -16,7 +16,7 @@
 
     {% for item in news %}
     <div class="card mt-3">
-        <div class="card-header "><a href=""> {{item.category}}</a></div>
+        <div class="card-header "> {{item.category}}</div>
         <div class="card-body  ">
             {% if item.photo %}
             <img src="{{item.photo.url}}" alt="y" width="300" height="250" class="float-left  "  >
@@ -28,7 +28,7 @@
             <a href="{{item.get_absolute_url}}" class="btn btn-primary">Read more...</a>
             </div>
             <div class="card-footer bg-transparent border-success">{{item.created_at|date:"Y-m-d H:i:s"}}  </div>
-    </div>
+        </div>
    {% endfor %}
 
 

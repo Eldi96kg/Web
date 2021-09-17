@@ -2,13 +2,13 @@
 
 {%block title%}Category{%endblock%}
 {% block sidebar %}
-    <div class="col-md-4">
+<span>Категория:{{title}}</span>
     <div class="list-group mt-3">
 {% for item in categories %}
   <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action">{{item.title}}</a>
         {% endfor %}
 </div>
-    </div>
+
 
 {%endblock%}
 
@@ -28,7 +28,8 @@
                                     <a href="{{item.get_absolute_url}}" class="btn btn-primary">Read more...</a>
                             </div>
                             <div class="card-footer bg-transparent border-success">{{item.created_at|date:"Y-m-d H:i:s"}}  </div>
-   {% endfor %}
-            </div>
+   </div>
+        {% endfor %}
+
 
 {%endblock%}
