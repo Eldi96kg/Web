@@ -2,15 +2,7 @@
 
 {%block title%}Home{%endblock%}
 
-{% block sidebar %}
-
-    <div class="list-group mt-3">
-        {% for item in category %}
-        <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action">{{item.title}}</a>
-        {% endfor %}
-    </div>
-
-{%endblock%}
+{% block sidebar %}{% include 'inc/_side.html' %}{%endblock%}
 
 {% block content %}
 

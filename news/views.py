@@ -6,7 +6,9 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-categories = Category.objects.all()
+from django.db.models import *
+# categories = Category.objects.all()  #вывод всех без исключения категорий
+categories = Category.objects.annotate(cnt=Count("get_news")).filter(cnt__gt=0)  # вывод категорий имеющих данные(не пустые)
 
 
 class HomeList(ListView):
@@ -28,6 +30,7 @@ class NewsByCategory(ListView):
     model = News
     template_name = 'news/category.html'
     context_object_name = 'news'
+    paginate_by = 3
 
     def get_queryset(self):
         return News.objects.filter(category_id=self.kwargs['cat_id'],

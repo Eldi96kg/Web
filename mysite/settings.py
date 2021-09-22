@@ -1,10 +1,8 @@
 import os
 from pathlib import Path
+import django_heroku
+import dj_database_url
 
-import dj-database-url
-
-db_from_env = dj-database-url.config()
-DATABASE['default'].update(db_from_env)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -110,4 +108,5 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,  "mysite/static"),
-]
+
+django_heroku.settings(locals())
